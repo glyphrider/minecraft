@@ -1,5 +1,5 @@
 data "template_file" "user_data" {
-  template = file(var.template_file})
+  template = file(var.template_file)
 }
 
 # Use CloudInit to add the instance
