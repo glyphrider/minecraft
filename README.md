@@ -98,3 +98,9 @@ ansible-playbook -i inventory.yml site.yml
 ### Change stuff
 
 Then run again....
+
+## Give up and go home
+
+```
+terraform destroy
+```
