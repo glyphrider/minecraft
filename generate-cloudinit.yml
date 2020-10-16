@@ -10,7 +10,7 @@
 
   - name: Process cloudinit template to generate cloudinit.cfg
     template:
-      src: cloudinit.j2
+      src: generate-cloudinit.j2
       dest: cloudinit.yml
     vars:
       ssh_key: "{{lookup('file', ssh_key_file )}}"
