@@ -73,7 +73,8 @@ but be aware that ansible is present in the generated inventory file, so you wou
 go build mkinventory.go
 ```
 
-This program uses the mkinventory.tmpl file, at run-time not compile-time. You may tweak this template as needed to do cool stuff.
+This program reads the terraform.tfstate file and uses the mkinventory.tmpl file to transform the tfstate into inventory.yml.
+You may tweak this template as needed to do cool stuff. The template is read at run-time, so you needn't recompile when you make changes to the template.
 
 ## Do Over and Over Again
 
