@@ -1,0 +1,9 @@
+---
+all:
+  hosts:
+{{ range $resource := .resources }}{{ if eq .type "aws_instance" }}{{ range .instances }}    {{ .attributes.tags.Name }}:
+      ansible_host: {{ .attributes.public_ip }}
+{{ end }}{{ end }}{{ if eq .type "libvirt_domain" }}{{ range .instances }}    {{ .attributes.name }}:
+      {{ range .attributes.network_interface }}{{ range .addresses }}ansible_host: {{ . }}{{ end }}{{ end }}
+{{ end }}{{ end }}{{ end }}  vars:
+    ansible_user: ansible

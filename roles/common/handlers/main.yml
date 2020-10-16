@@ -1,0 +1,23 @@
+---
+- name: Restart SSH Service
+  ansible.builtin.service:
+    name: sshd
+    state: restarted
+  listen: sshd_restart
+  become: yes
+
+- name: Generate Locales
+  command: /usr/sbin/locale-gen
+  listen: "locale configuration change"
+
+- name: Reboot
+  listen: reboot
+  reboot:
+  become: yes
+  
+- name: Restart sudo service
+  listen: sudo_reload
+  service:
+    name: sudo
+    state: reloaded
+  become: yes

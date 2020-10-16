@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  connection: local
+
+  tasks:
+
+  - name: Cloud Init
+    debug:
+      msg: "Generating cloudinit.cfg for user {{ ssh_user }} using key file {{ ssh_key_file }}"
+
+  - name: Process cloudinit template to generate cloudinit.cfg
+    template:
+      src: cloudinit.j2
+      dest: cloudinit.yml
+    vars:
+      ssh_key: "{{lookup('file', ssh_key_file )}}"

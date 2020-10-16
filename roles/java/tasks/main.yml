@@ -1,0 +1,7 @@
+---
+- name: install openjdk-8-jre-headless
+  apt:
+    name: openjdk-8-jre-headless
+    state: present
+    update_cache: yes
+  become: yes

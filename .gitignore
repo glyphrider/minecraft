@@ -1,0 +1,6 @@
+roles/minecraft/files/server.jar
+mkinventory
+inventory.yml
+cloudinit.yml
+terraform.tfstate
+terraform.tfstate.backup

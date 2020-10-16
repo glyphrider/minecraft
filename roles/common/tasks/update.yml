@@ -1,0 +1,27 @@
+---
+- name: apt-get update
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: apt-get upgrade
+  apt:
+    name: "*"
+    state: latest
+  become: yes
+
+- name: apt-get full-upgrade
+  apt:
+    upgrade: full
+  become: yes
+
+- name: check if reboot is necessary
+  stat:
+    path: /var/run/reboot-required
+  become: yes
+  register: reboot_required
+
+- name: reboot is necessary
+  reboot:
+  become: yes
+  when: reboot_required.stat.exists

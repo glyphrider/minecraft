@@ -1,0 +1,16 @@
+#cloud-config
+# vim: syntax=yaml
+#
+ssh_pwauth: False
+chpasswd:
+  list: |
+     root: StrongPassword
+  expire: False
+
+users:
+  - name: {{ ssh_user }}
+    ssh_authorized_keys:
+      - {{ ssh_key }}
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    shell: /bin/bash
+    groups: wheel, sudo

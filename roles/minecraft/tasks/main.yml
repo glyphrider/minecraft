@@ -1,0 +1,37 @@
+---
+- name: mkdir /opt/minecraft
+  file:
+    path: "{{ INSTALL_ROOT }}"
+    state: directory
+    owner: "{{ ansible_user }}"
+  become: yes
+
+- name: copy server.jar to server
+  copy:
+    src: "server.jar"
+    dest: "{{ INSTALL_ROOT }}"
+    remote_src: no
+
+- name: server.properties
+  template:
+    src: server_properties.j2
+    dest: "{{ INSTALL_ROOT }}/server.properties"
+
+- name: first server run (generates eula.txt)
+  command: "java -jar server.jar nogui"
+  args:
+    chdir: "{{ INSTALL_ROOT }}"
+  ignore_errors: yes
+
+- name: eula.txt
+  lineinfile:
+    path: "{{ INSTALL_ROOT }}/eula.txt"
+    regexp: ^eula=
+    line: eula=TRUE
+    
+- name: service template
+  template:
+    src: minecraft_service.j2
+    dest: /lib/systemd/system/minecraft.service
+  become: yes
+  notify: systemd

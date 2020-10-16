@@ -1,0 +1,9 @@
+---
+- name: systemd reload
+  listen: systemd
+  systemd:
+    daemon_reload: yes
+    name: minecraft
+    state: started
+    enabled: yes
+  become: yes

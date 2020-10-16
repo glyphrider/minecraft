@@ -1,0 +1,10 @@
+{
+  "registry.terraform.io/dmacvicar/libvirt": {
+    "hash": "h1:hHMp8KBGEf8xHAscW0rMMHLEmj9KmP66yx7C94pAegw=",
+    "version": "0.6.2"
+  },
+  "registry.terraform.io/hashicorp/template": {
+    "hash": "h1:94qn780bi1qjrbC3uQtjJh3Wkfwd5+tTtJHOb7KTg9w=",
+    "version": "2.2.0"
+  }
+}
