@@ -7,3 +7,5 @@ terraform.tfstate
 terraform.tfstate.backup
 .terraform
 .terraform.lock.hcl
+.vagrant
+ubuntu-bionic-18.04-cloudimg-console.log
