@@ -20,7 +20,8 @@ Not covered here.
 
 ### Install the libvirt provider for terraform
 
-This is more complicated than it should be, thanks to terraform 0.13. Down load the _release_ from [here](https://github.com/dmacvicar/libvirt).
+This is more complicated than it should be, thanks to terraform 0.13. Down load the _release_ from
+[here](https://github.com/dmacvicar/terraform-provider-libvirt).
 I scored version 0.6.2, but YMMV. Copy the executable (just the executable) to
 `~/.local/share/terraform/plugins/registry.terraform.io/dmacvicar/libvirt/0.6.2/linux_amd64/terraform-provider-libvirt`.
 The astute among you will recognize how parts of that path are put together.
@@ -60,10 +61,10 @@ ssh-add ansible
 Now, let's use ansible to build our cloudinit.cfg, so we can use cloud-init to customize the ubuntu cloud image.
 
 ```
-ansible-playbook generate-cloudinit.ym -e 'SSH_USER=ansible SSH_KEY_FILE=ansible.pub'
+ansible-playbook generate-cloudinit.yml -e 'ssh_user=ansible ssh_key_file=ansible.pub'
 ```
 
-If you key file has a different name (or isn't in the local directory), adjust the SSH_KEY_FILE variable.
+If your key file has a different name (or isn't in the local directory), adjust the SSH_KEY_FILE variable.
 Similarly, if you want to use a different username, then adjust SSH_USER;
 but be aware that ansible is present in the generated inventory file, so you would need to modify the inventory or (better yet) the mkinventory.tmpl file.
 

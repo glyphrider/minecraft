@@ -1,4 +1,5 @@
-roles/minecraft/files/server.jar
+ansible
+ansible.pub
 mkinventory
 inventory.yml
 cloudinit.yml
