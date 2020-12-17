@@ -5,3 +5,5 @@ inventory.yml
 cloudinit.yml
 terraform.tfstate
 terraform.tfstate.backup
+.terraform
+.terraform.lock.hcl
