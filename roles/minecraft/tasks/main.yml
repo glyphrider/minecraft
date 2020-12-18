@@ -33,6 +33,20 @@
     dest: "{{ INSTALL_ROOT }}/server.properties"
   become: yes
 
+- name: whitelist.json
+  copy:
+    src: "whitelist.json"
+    dest: "{{ INSTALL_ROOT }}"
+    remote_src: no
+  become: yes
+
+- name: ops.json
+  copy:
+    src: "ops.json"
+    dest: "{{ INSTALL_ROOT }}"
+    remote_src: no
+  become: yes
+
 - name: first server run (generates eula.txt)
   command: "java -jar server.jar nogui"
   args:
