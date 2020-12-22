@@ -1,0 +1,6 @@
+[submodule "serverless"]
+	path = serverless
+	url = git@github.com:glyphrider/minecraft.sls
+[submodule "roles/minecraft"]
+	path = roles/minecraft
+	url = git@github.com:glyphrider/minecraft.role
