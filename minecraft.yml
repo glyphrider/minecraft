@@ -1,0 +1,5 @@
+---
+- hosts: tag_Name_minecraft_server
+  roles:
+  - common
+  - minecraft

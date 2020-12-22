@@ -1,13 +1,8 @@
 terraform {
   required_providers {
-    libvirt = {
-      source  = "dmacvicar/libvirt"
-      version = "0.6.2"
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
     }
   }
 }
-
-provider "libvirt" {
-  uri = "qemu:///system"
-}
-

@@ -1,2 +1,6 @@
 ---
-- import_tasks: update.yml
+- import_tasks: update_apt.yml
+  when: (ansible_facts['distribution'] == "Debian" or ansible_facts['distribution'] == "Ubuntu")
+
+- import_tasks: update_yum.yml
+  when: (ansible_facts['distribution'] == "CentOS" or ansible_facts['distribution'] == "RedHat")

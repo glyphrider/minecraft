@@ -1,0 +1,27 @@
+---
+- name: yum update cache
+  yum:
+    update_cache: yes
+  become: yes
+
+- name: yum install yum-utils
+  yum:
+    name: yum-utils
+    state: present
+  become: yes
+
+- name: yum upgrade
+  yum:
+    name: "*"
+    state: latest
+  become: yes
+
+- name: check if reboot is necessary
+  shell: needs-restarting -r
+  ignore_errors: yes
+  register: needs_reboot
+
+- name: reboot
+  reboot:
+  become: yes
+  when: needs_reboot is failure
