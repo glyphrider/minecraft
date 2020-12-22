@@ -23,7 +23,7 @@ cd ..
 1. Create a new deployment key via `ssh-keygen -f ansible -C 'Ansible Minecraft Automation' -P ''`. Optionally add this to a running ssh-agent `ssh-add ansible`.
 1. Create a reasonable operators.json file, which is an array of strings (Minecraft profile names), for the ops list.
 1. Create a reasonable users.json file, which is an array of strings (Minecraft profile names), for the whitelist.
-1. Create a valid cloudinit.yml using ansible `ansible-playbook generate-cloudinit.yml -e 'ssh_user=ansible,ssh_key_file=ansible.pub'`
+1. Create a valid cloudinit.yml using ansible `ansible-playbook generate-cloudinit.yml -e 'ssh_user=ansible ssh_key_file=ansible.pub'`
 1. Run `terraform init` to acquire needed plugins and providers.
 1. Run `terraform apply` to create the infrastructure.
 1. Run `ansible-playbook minecraft.yml` to provision the minecraft server.
