@@ -6,7 +6,7 @@ provider "aws" {
 resource "aws_vpc" "vpc" {
   cidr_block = "10.47.0.0/16"
   tags = {
-    Name = "bhw-vpc"
+    Name = "minecraft-vpc"
   }
   # count = 1 # "${var.use_existing_vpc == "" ? 1 : 0}"
 }
@@ -72,7 +72,7 @@ resource "aws_default_route_table" "route_table" {
     gateway_id = aws_internet_gateway.gw.id
   }
   tags = {
-    Name = "default route table"
+    Name = "minecraft default route table"
   }
 }
 
@@ -109,6 +109,15 @@ resource "aws_instance" "minecraft" {
   }
 }
 
-output "server" {
-  value = aws_instance.minecraft.public_ip
+#resource "aws_eip" "lb" {
+#  instance = aws_instance.minecraft.id
+#  vpc      = true
+#}
+
+resource "aws_route53_record" "minecraft" {
+  zone_id = "Z03614492RV5OU7JK9F4R"
+  name = "minecraft.wardtalks.com"
+  type = "A"
+  ttl = "300"
+  records = [aws_instance.minecraft.public_ip]
 }
