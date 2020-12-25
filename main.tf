@@ -53,14 +53,15 @@ resource "aws_security_group" "out_sg" {
 resource "aws_subnet" "subnet" {
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = "10.47.0.0/24"
-tags = {
+  map_public_ip_on_launch = true
+  tags = {
     Name = "minecraft-subnet"
   }
 }
 
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.vpc.id
-tags = {
+  tags = {
     Name = "minecraft-gw"
   }
 }
@@ -85,11 +86,37 @@ data "aws_ami" "ubuntu" {
   }
 
   filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
+  filter {
     name   = "virtualization-type"
     values = ["hvm"]
   }
 
   owners = ["099720109477"] # Canonical
+}
+
+data "aws_ami" "centos" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["CentOS Linux 7 x86_64 HVM EBS *"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners      = ["679593333241"]
 }
 
 data "template_file" "user_data" {
@@ -98,9 +125,8 @@ data "template_file" "user_data" {
 
 resource "aws_instance" "minecraft" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.xlarge"
+  instance_type = "t3.xlarge"
   subnet_id     = aws_subnet.subnet.id
-  associate_public_ip_address = true
   user_data     = data.template_file.user_data.rendered
   vpc_security_group_ids = [aws_security_group.minecraft_sg.id, aws_security_group.ssh_sg.id, aws_security_group.out_sg.id ]
 
@@ -109,15 +135,11 @@ resource "aws_instance" "minecraft" {
   }
 }
 
-#resource "aws_eip" "lb" {
-#  instance = aws_instance.minecraft.id
-#  vpc      = true
-#}
-
 resource "aws_route53_record" "minecraft" {
-  zone_id = "Z03614492RV5OU7JK9F4R"
+  zone_id = "Z03614492RV5OU7JK9F4R" # my zone, not managed by terraform
   name = "minecraft.wardtalks.com"
   type = "A"
-  ttl = "300"
+  ttl = "60"
   records = [aws_instance.minecraft.public_ip]
+  count = aws_instance.minecraft.public_ip == "" ? 0 : 1
 }
