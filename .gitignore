@@ -12,3 +12,4 @@ ubuntu-bionic-18.04-cloudimg-console.log
 operators.json
 server.jar
 users.json
+aws/dns.tf
