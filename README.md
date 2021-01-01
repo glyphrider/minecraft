@@ -17,4 +17,4 @@ cd -
 1. Create a reasonable operators.json file, which is an array of strings (Minecraft profile names), for the ops list.
 1. Create a reasonable users.json file, which is an array of strings (Minecraft profile names), for the whitelist.
 1. Create a valid cloudinit.yml using ansible `ansible-playbook generate-cloudinit.yml -e 'ssh_user=ansible ssh_key_file=ansible.pub'`
-1. Choose your desired provider ([aws](aws/README.md), [libvirt](libvirt/README.md), [vagrant](vagrant/README.md) and change into that directory.
+1. Choose your desired provider ([aws](aws/README.md), [libvirt](libvirt/README.md), or [vagrant](vagrant/README.md)) and change into that directory.
