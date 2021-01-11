@@ -51,12 +51,12 @@ data "template_file" "user_data" {
   template = file("../cloudinit.yml")
 }
 
-module "ubuntu_focal" {
-  source = "./modules/ubuntu_focal"
+module "minecraft_ami" {
+  source = "./modules/amazon_linux"
 }
 
 resource "aws_instance" "minecraft" {
-  ami           = module.ubuntu_focal.id
+  ami           = module.minecraft_ami.id
   instance_type = "t3.xlarge"
   subnet_id     = module.vpc.public_subnet_id
   user_data     = data.template_file.user_data.rendered
