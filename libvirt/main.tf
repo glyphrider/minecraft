@@ -1,5 +1,5 @@
 module "minecraft" {
-    source = "./modules/bionic"
+    source = "./modules/amazon_linux"
 }
 
 output "minecraft" {
